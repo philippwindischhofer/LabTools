@@ -1,12 +1,17 @@
+import requests, time
+
 class fridge:
     
-    def __init__(self):
-        import requests
-        r = requests.get('http://freezer/ezt.html')
+    def __init__(self, url = 'http://freezer/ezt.html'):
+        self.url = url
+        self.update()
+
+    def update(self):
+        r = requests.get(self.url)
         self.text = r.text
         #Now find the index of the first instance of TEMPERATURE
-        self.t_index = r.text.find('TEMPERATURE</td>')
-
+        self.t_index = r.text.find('TEMPERATURE</td>')        
+        
     def get_set_temp(self):
         '''
         Parameters: none, it just accesses the fridge website
@@ -35,7 +40,15 @@ class fridge:
     #set_temp = float(r.text[found+51:found+55])
     #product_temp = float(r.text[found+106:found+110])
 
-f = fridge()
-ST = f.get_set_temp()
-FT = f.get_fridge_temp()
-PT = f.get_product_temp()
+if __name__ == "__main__":
+
+    f = fridge()
+    
+    while True:
+        f.update()
+
+        print("Set point: {st}, fridge temp.: {ft}, product temp.: {pt}".format(
+            st = f.get_set_temp(), ft = f.get_fridge_temp(), pt = f.get_product_temp()
+        ))
+        
+        time.sleep(1)
