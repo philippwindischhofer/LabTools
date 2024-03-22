@@ -10,8 +10,8 @@ class fridge:
         r = requests.get(self.url)
         self.text = r.text
         #Now find the index of the first instance of TEMPERATURE
-        self.t_index = r.text.find('TEMPERATURE</td>')        
-        
+        self.t_index = r.text.find('TEMPERATURE</td>')
+
     def get_set_temp(self):
         '''
         Parameters: none, it just accesses the fridge website
