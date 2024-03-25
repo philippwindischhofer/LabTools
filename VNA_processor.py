@@ -1,6 +1,7 @@
 #Class to remote control the VNA 
 import RsInstrument, time
 import numpy as np
+import pickle, datetime
 from RsInstrument import *
 
 class VNA:
@@ -65,10 +66,27 @@ class VNA:
         '''
         self.instr.close()
 
+if __name__ == "__main__":
 
-#example code.
-vna = VNA()
-vna.set_trace_averaging(navg=10)
-trace = vna.get_trace_measurement(tracename='Trc1')
-freqs = vna.get_freq_values()
-vna.close_instrument()
+    while True:
+
+        #example code.
+        vna = VNA()
+        vna.set_trace_averaging(navg=10)
+        trace = vna.get_trace_measurement(tracename='Trc1')
+        freqs = vna.get_freq_values()
+        vna.close_instrument()
+
+        data = {"freqs": freqs, "trace": trace}
+
+        timestamp = datetime.datetime.now().isoformat()
+        file_suffix = "pkl"
+        path = f"measurement_at_{timestamp}.{file_suffix}"
+        with open(path, 'wb') as outfile:
+            pickle.dump(data, outfile)
+
+        print(f"Wrote measurement to '{path}'.")
+            
+        time.sleep(300)
+        
+        
