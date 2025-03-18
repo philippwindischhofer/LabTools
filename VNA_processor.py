@@ -81,7 +81,7 @@ if __name__ == "__main__":
 
         timestamp = datetime.datetime.now().isoformat()
         file_suffix = "pkl"
-        path = f"measurement_at_{timestamp}.{file_suffix}"
+        path = f"testrun/measurement_at_{timestamp}.{file_suffix}"
         with open(path, 'wb') as outfile:
             pickle.dump(data, outfile)
 
@@ -90,3 +90,8 @@ if __name__ == "__main__":
         time.sleep(300)
         
         
+
+
+
+#with open("<filepath>", 'rb') as infile:
+#    data = pickle.load(infile)

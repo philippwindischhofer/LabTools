@@ -17,7 +17,13 @@ class fridge:
         Parameters: none, it just accesses the fridge website
         Returns: float, Set point temperature of the fridge
         '''
-        ST = float(self.text[self.t_index+51:self.t_index+55])
+        print(self.t_index)
+        if self.isfloat(self.text[round(self.t_index+51):round(self.t_index+55)]):
+            ST = float(self.text[round(self.t_index+51):round(self.t_index+55)])
+        elif self.isfloat(self.text[round(self.t_index+50):round(self.t_index+53)]):
+            ST = float(self.text[round(self.t_index+50):round(self.t_index+53)])
+        else:
+            ST = -999
         return(ST)
 
     def get_fridge_temp(self):
@@ -25,7 +31,12 @@ class fridge:
         Parameters: none, it just accesses the fridge website
         Returns: float, Set point temperature of the fridge
         '''
-        FT = float(self.text[self.t_index+29:self.t_index+33])
+        if self.isfloat(self.text[round(self.t_index+29):round(self.t_index+33)]):
+            FT = float(self.text[round(self.t_index+29):round(self.t_index+33)])
+        elif self.isfloat(self.text[round(self.t_index+28):round(self.t_index+32)]): 
+            FT = float(self.text[round(self.t_index+28):round(self.t_index+32)])
+        else:
+            FT = -999
         return(FT)
 
     def get_product_temp(self):
@@ -33,9 +44,22 @@ class fridge:
         Parameters: none, it just accesses the fridge website
         Returns: float, Set point temperature of the fridge
         '''
-        PT = float(self.text[self.t_index+106:self.t_index+110])
+        if self.isfloat(self.text[self.t_index+106:self.t_index+110]):
+            PT = float(self.text[self.t_index+106:self.t_index+110])
+        elif self.isfloat(self.text[self.t_index+104:self.t_index+107]):
+            PT = float(self.text[self.t_index+104:self.t_index+107])
+        elif self.isfloat(self.text[self.t_index+108:self.t_index+112]):
+            PT = float(self.text[self.t_index+108:self.t_index+112])
+        else:
+            PT = -999
         return(PT)
 
+    def isfloat(self, num):
+        try:
+            float(num)
+            return True
+        except ValueError:
+            return False
     #fridge_temp = float(r.text[found+29:found+33])
     #set_temp = float(r.text[found+51:found+55])
     #product_temp = float(r.text[found+106:found+110])
