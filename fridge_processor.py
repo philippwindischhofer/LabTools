@@ -17,7 +17,6 @@ class fridge:
         Parameters: none, it just accesses the fridge website
         Returns: float, Set point temperature of the fridge
         '''
-        print(self.t_index)
         if self.isfloat(self.text[round(self.t_index+51):round(self.t_index+55)]):
             ST = float(self.text[round(self.t_index+51):round(self.t_index+55)])
         elif self.isfloat(self.text[round(self.t_index+50):round(self.t_index+53)]):
