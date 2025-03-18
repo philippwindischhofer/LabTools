@@ -69,9 +69,9 @@ if __name__ == "__main__":
     
     while True:
         f.update()
-
-        print("Set point: {st}, fridge temp.: {ft}, product temp.: {pt}".format(
-            st = f.get_set_temp(), ft = f.get_fridge_temp(), pt = f.get_product_temp()
+        cur_time = time.ctime()
+        print("{time}: Set point: {st}, fridge temp.: {ft}, product temp.: {pt}".format(
+            time = cur_time, st = f.get_set_temp(), ft = f.get_fridge_temp(), pt = f.get_product_temp()
         ))
         
-        time.sleep(1)
+        time.sleep(5)
